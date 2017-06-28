@@ -11,7 +11,7 @@ public class MongoConfig {
 	
 	@Bean
 	public MongoTemplate mongoTemplate() {
-		MongoTemplate mongoTemplate = new MongoTemplate(new MongoClient("127.0.0.1"), "Omega");
+		MongoTemplate mongoTemplate = new MongoTemplate(new MongoClient(), "Omega");
 		return mongoTemplate;
 	}
 }

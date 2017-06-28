@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
@@ -18,6 +17,7 @@ import com.example.domain.User;
 @ComponentScan(basePackages={"com.example.controller"})
 public class DemoApplication {
 
+	
 	public static void main(String[] args) {
 		ApplicationContext ctx = SpringApplication.run(DemoApplication.class, args);
 		
@@ -25,19 +25,30 @@ public class DemoApplication {
 		
 		List<User> users = new ArrayList<>();
 		
-		User user1 = new User("Name", 11);
-		User user2 = new User("Hello", 22);
+		User user1 = new User("Willy", 27);
+		User user2 = new User("Zheng", 28);
 		
 		users.add(user1);
 		users.add(user2);
 		
+		// Save
 		mongoTemplate.insert(users, User.class);
 		System.out.println("========================");
 		
+		// Find One
 		Query query = new Query();
-		query.addCriteria(Criteria.where("name").is("Hello").and("age").is(22));
+		query.addCriteria(Criteria.where("name").is("Willy").and("age").is(27));
 		
 		User userTest = mongoTemplate.findOne(query, User.class);
 		System.out.println("UserTest " + userTest.toString());
+		
+		query = new Query();
+		query.addCriteria(Criteria.where("name").is("Willy").and("age").is(27));
+		List<User> queryUsers = mongoTemplate.find(query, User.class);
+		for (User user : queryUsers) {
+			System.out.println("User find ==> " + user);
+		}
+		
+		
 	}
 }
