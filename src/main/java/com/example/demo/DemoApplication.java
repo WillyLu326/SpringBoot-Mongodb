@@ -12,6 +12,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
 import com.example.domain.User;
+import com.mongodb.WriteResult;
 
 @SpringBootApplication
 @ComponentScan(basePackages={"com.example.controller"})
@@ -42,6 +43,7 @@ public class DemoApplication {
 		User userTest = mongoTemplate.findOne(query, User.class);
 		System.out.println("UserTest " + userTest.toString());
 		
+		// Find All
 		query = new Query();
 		query.addCriteria(Criteria.where("name").is("Willy").and("age").is(27));
 		List<User> queryUsers = mongoTemplate.find(query, User.class);
@@ -49,6 +51,12 @@ public class DemoApplication {
 			System.out.println("User find ==> " + user);
 		}
 		
+		// Delete
+		mongoTemplate.remove(query, User.class);
+		List<User> allUsers = mongoTemplate.findAll(User.class);
+		for (User user : allUsers) {
+			System.out.println("All Users ==> " + user);
+		}
 		
 	}
 }
