@@ -10,9 +10,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 
 import com.example.domain.User;
-import com.mongodb.WriteResult;
 
 @SpringBootApplication
 @ComponentScan(basePackages={"com.example.controller"})
@@ -57,6 +57,16 @@ public class DemoApplication {
 		for (User user : allUsers) {
 			System.out.println("All Users ==> " + user);
 		}
+		
+		// Update
+		query = new Query();
+		query.addCriteria(Criteria.where("name").is("Zheng"));
+		//User zheng = mongoTemplate.findOne(query, User.class);
+		Update update = new Update();
+		update.set("age", 100);
+		mongoTemplate.updateFirst(query, update, User.class);
+		User firstQueryUser = mongoTemplate.findOne(query, User.class);
+		System.out.println("Update User ==> " + firstQueryUser);
 		
 	}
 }
