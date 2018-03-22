@@ -1,5 +1,7 @@
 package com.mongodb.springbootmongo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,12 +20,13 @@ public class StudentController {
 	StudentService studentService;
 	
 	@GetMapping(path="/")
-	public String getStudents() {
-		return "Student Home Page";
+	public List<Student> getStudents() {
+		return this.studentService.getStudents();
 	}
 	
 	@PostMapping(path="/")
-	public void saveStudent(@RequestBody Student student) {
-		System.out.println(student.toString());
+	public Student saveStudent(@RequestBody Student student) {
+		this.studentService.saveStudent(student);
+		return student;
 	}
 }

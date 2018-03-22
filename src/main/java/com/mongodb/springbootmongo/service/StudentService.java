@@ -1,5 +1,7 @@
 package com.mongodb.springbootmongo.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.stereotype.Service;
@@ -12,12 +14,15 @@ public class StudentService {
 	@Autowired
 	private MongoOperations mongoOperations;
 	
-	public void createStudent() {
-		Student student = new Student();
-		student.setName("Willy Lu");
-		student.setSchool("CPP");
-		
+	
+	public void saveStudent(Student student) {		
 		this.mongoOperations.save(student);
 	}
+	
+	public List<Student> getStudents() {
+		return this.mongoOperations.findAll(Student.class);
+	}
+	
+	
 	
 }
