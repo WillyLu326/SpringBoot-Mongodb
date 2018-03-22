@@ -3,6 +3,7 @@ package com.mongodb.springbootmongo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,5 +40,10 @@ public class StudentController {
 	@GetMapping(path="/names/{name}")
 	public List<Student> getStudentsByName(@PathVariable String name) {
 		return studentService.getStudentsByName(name);
+	}
+	
+	@DeleteMapping(path="/{id}")
+	public Integer removeStudent(@PathVariable String id) {
+		return studentService.deleteStudent(id);
 	}
 }
