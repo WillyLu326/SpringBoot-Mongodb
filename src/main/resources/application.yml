@@ -1,4 +1,0 @@
-spring:
-  data:
-    mongodb:
-      uri: "mongodb://willylu:willylu@ds139352.mlab.com:39352/spring-boot-mongodb"
