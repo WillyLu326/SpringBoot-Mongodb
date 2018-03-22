@@ -36,5 +36,8 @@ public class StudentController {
 		return studentService.getStudentById(id);
 	}
 	
-	
+	@GetMapping(path="/names/{name}")
+	public List<Student> getStudentsByName(@PathVariable String name) {
+		return studentService.getStudentsByName(name);
+	}
 }

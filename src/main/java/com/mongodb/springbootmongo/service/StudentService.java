@@ -36,4 +36,11 @@ public class StudentService {
 		return mongoOperations.find(query, Student.class);
 	}
 	
+	public Integer deleteStudent(String id) {
+		Query query = new Query();
+		Criteria criteria = Criteria.where("id").is(id);
+		query.addCriteria(criteria);
+		return (int) mongoOperations.remove(query, Student.class).getDeletedCount();
+	}
+	
 }
