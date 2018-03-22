@@ -26,10 +26,14 @@ public class StudentService {
 	}
 	
 	public Student getStudentById(String id) {
-		Query query = new Query();
-		Criteria criteria = Criteria.where("id").is(id);
-		query.addCriteria(criteria);
 		return mongoOperations.findById(id, Student.class);
+	}
+	
+	public List<Student> getStudentsByName(String name) {
+		Query query = new Query();
+		Criteria criteria = Criteria.where("name").is(name);
+		query.addCriteria(criteria);
+		return mongoOperations.find(query, Student.class);
 	}
 	
 }
